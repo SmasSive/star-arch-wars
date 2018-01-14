@@ -1,10 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
-androidExtensions {
-  experimental = true
-}
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 27
@@ -29,6 +26,9 @@ dependencies {
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
   implementation 'com.android.support:appcompat-v7:27.0.2'
+
+  implementation 'com.github.bumptech.glide:glide:4.5.0'
+  kapt 'com.github.bumptech.glide:compiler:4.5.0'
 
   implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
   implementation 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
