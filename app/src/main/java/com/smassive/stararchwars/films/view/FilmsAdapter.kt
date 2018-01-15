@@ -4,9 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.smassive.stararchwars.R
+import com.smassive.stararchwars.base.extensions.getScreenWidthPixels
+import com.smassive.stararchwars.base.extensions.px
+import com.smassive.stararchwars.base.view.GlideApp
 import com.smassive.stararchwars.films.model.FilmItem
 import kotlinx.android.synthetic.main.item_film.view.filmDirector
 import kotlinx.android.synthetic.main.item_film.view.filmPoster
@@ -34,9 +35,12 @@ class FilmsAdapter : RecyclerView.Adapter<FilmsAdapter.FilmViewHolder>() {
 
     fun bind(filmItem: FilmItem) {
       with(filmItem) {
-        Glide.with(itemView.context)
+        GlideApp.with(itemView.context)
             .load(filmPosterUrl)
-            .apply(RequestOptions.centerCropTransform())
+            .placeholder(R.drawable.ic_rebel_alliance_logo)
+            .error(R.drawable.ic_rebel_alliance_logo)
+            .override(getScreenWidthPixels(), 250.px)
+            .centerCrop()
             .into(itemView.filmPoster)
         itemView.filmTitle.text = filmTitle
         itemView.filmDirector.text = filmDirector
