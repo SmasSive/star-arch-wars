@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.smassive.stararchwars.R
+import com.smassive.stararchwars.base.extensions.getDimensionPixels
 import com.smassive.stararchwars.base.extensions.getScreenWidthPixels
-import com.smassive.stararchwars.base.extensions.px
 import com.smassive.stararchwars.base.view.GlideApp
 import com.smassive.stararchwars.films.model.FilmItem
 import kotlinx.android.synthetic.main.item_film.view.filmDirector
@@ -39,7 +39,7 @@ class FilmsAdapter : RecyclerView.Adapter<FilmsAdapter.FilmViewHolder>() {
             .load(filmPosterUrl)
             .placeholder(R.drawable.ic_rebel_alliance_logo)
             .error(R.drawable.ic_rebel_alliance_logo)
-            .override(getScreenWidthPixels(), 250.px)
+            .override(getScreenWidthPixels(), itemView.context.getDimensionPixels(R.dimen.card_height))
             .centerCrop()
             .into(itemView.filmPoster)
         itemView.filmTitle.text = filmTitle
