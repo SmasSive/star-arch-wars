@@ -4,6 +4,6 @@
   <dimen name="margin_middle">16dp</dimen>
   <dimen name="margin_small">8dp</dimen>
 
-  <dimen name="text_big">20sp</dimen>
-  <dimen name="text_middle">16sp</dimen>
+  <dimen name="text_big">24sp</dimen>
+  <dimen name="text_middle">20sp</dimen>
 </resources>
