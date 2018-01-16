@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.smassive.stararchwars.R
+import com.smassive.stararchwars.base.extensions.enterListAnimation
 import com.smassive.stararchwars.data.base.extensions.observeNonNull
 import com.smassive.stararchwars.data.films.datasource.FilmsFirebaseSource
 import com.smassive.stararchwars.data.films.repository.FilmsRepository
@@ -36,6 +37,7 @@ class FilmsActivity : AppCompatActivity() {
 
   private fun hideLoading() {
     filmsList.visibility = View.VISIBLE
+    filmsList.enterListAnimation(this)
     filmsLoading.visibility = View.GONE
   }
 
