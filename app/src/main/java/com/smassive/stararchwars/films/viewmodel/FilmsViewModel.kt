@@ -3,8 +3,9 @@ package com.smassive.stararchwars.films.viewmodel
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import com.smassive.stararchwars.base.extensions.map
+import com.smassive.stararchwars.data.base.extensions.map
 import com.smassive.stararchwars.data.films.model.Film
+import com.smassive.stararchwars.data.films.model.Films
 import com.smassive.stararchwars.data.films.repository.FilmsRepository
 import com.smassive.stararchwars.films.model.FilmItem
 
@@ -16,9 +17,11 @@ class FilmsViewModel(application: Application) : AndroidViewModel(application) {
     this.filmsRepository = filmsRepository
   }
 
-  fun getFilms(): LiveData<List<FilmItem>> = filmsRepository.getFilms().map {
-    arrayListOf<FilmItem>().apply {
-      for (film in it.results) {
+  fun getFilms(): LiveData<List<FilmItem>> = filmsRepository.getFilms().map { it.getFilmItems() }
+
+  private fun Films.getFilmItems(): List<FilmItem> {
+    return arrayListOf<FilmItem>().apply {
+      for (film in this@getFilmItems.results) {
         add(film.getFilmItem())
       }
     }

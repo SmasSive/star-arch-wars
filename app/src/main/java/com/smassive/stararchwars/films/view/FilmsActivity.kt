@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.smassive.stararchwars.R
-import com.smassive.stararchwars.base.extensions.observeNonNull
+import com.smassive.stararchwars.data.base.extensions.observeNonNull
 import com.smassive.stararchwars.data.films.datasource.FilmsFirebaseSource
 import com.smassive.stararchwars.data.films.repository.FilmsRepository
 import com.smassive.stararchwars.films.viewmodel.FilmsViewModel

@@ -1,4 +1,4 @@
-package com.smassive.stararchwars.base.extensions
+package com.smassive.stararchwars.data.base.extensions
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
