@@ -8,7 +8,7 @@ import android.view.View
 import com.smassive.stararchwars.R
 import com.smassive.stararchwars.base.extensions.enterListAnimation
 import com.smassive.stararchwars.data.base.extensions.observeNonNull
-import com.smassive.stararchwars.data.films.datasource.FilmsFirebaseSource
+import com.smassive.stararchwars.data.films.datasource.remote.FilmsFirebaseSource
 import com.smassive.stararchwars.data.films.repository.FilmsRepository
 import com.smassive.stararchwars.films.viewmodel.FilmsViewModel
 import kotlinx.android.synthetic.main.activity_films.toolbar

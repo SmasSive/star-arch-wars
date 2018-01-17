@@ -1,4 +1,4 @@
-package com.smassive.stararchwars.data.films.datasource
+package com.smassive.stararchwars.data.films.datasource.remote
 
 import android.arch.lifecycle.LiveData
 import com.google.firebase.database.DataSnapshot
