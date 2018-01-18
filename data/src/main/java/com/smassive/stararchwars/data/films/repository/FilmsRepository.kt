@@ -3,7 +3,7 @@ package com.smassive.stararchwars.data.films.repository
 import android.arch.lifecycle.LiveData
 import com.google.firebase.database.DataSnapshot
 import com.smassive.stararchwars.data.base.extensions.map
-import com.smassive.stararchwars.data.films.datasource.remote.FilmsFirebaseSource
+import com.smassive.stararchwars.data.films.datasource.FilmsFirebaseSource
 import com.smassive.stararchwars.data.films.model.Film
 import com.smassive.stararchwars.data.films.model.Films
 
