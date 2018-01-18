@@ -9,4 +9,28 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name="AppTheme.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay"
+         parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay"
+         parent="ThemeOverlay.AppCompat.Light"/>
+
+  <style name="FilmList">
+    <item name="android:textColor">@color/star_wars_yellow</item>
+  </style>
+
+  <style name="FilmList.Title">
+    <item name="android:textSize">@dimen/text_big</item>
+    <item name="android:fontFamily">@font/roboto_bold</item>
+  </style>
+
+  <style name="FilmList.SubTitle">
+    <item name="android:textSize">@dimen/text_middle</item>
+    <item name="android:fontFamily">@font/roboto_light</item>
+  </style>
 </resources>
