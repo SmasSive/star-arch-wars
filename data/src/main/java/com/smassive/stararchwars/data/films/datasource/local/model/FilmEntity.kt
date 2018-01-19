@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "film")
-data class FilmEntity(@PrimaryKey val id: Int,
+data class FilmEntity(@PrimaryKey(autoGenerate = true) val id: Int = 0,
                       val characters: List<String> = arrayListOf(),
                       val created: String = "",
                       val director: String = "",
