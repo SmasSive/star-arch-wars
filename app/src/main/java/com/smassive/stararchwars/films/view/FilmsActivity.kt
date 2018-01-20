@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.smassive.stararchwars.R
+import com.smassive.stararchwars.StarArchWarsApplication
 import com.smassive.stararchwars.base.extensions.enterListAnimation
 import com.smassive.stararchwars.data.base.extensions.observeNonNull
 import com.smassive.stararchwars.data.films.datasource.remote.FilmsFirebaseSource
@@ -50,7 +51,7 @@ class FilmsActivity : AppCompatActivity() {
 
   private fun configViewModel() {
     filmsViewModel = ViewModelProviders.of(this).get(FilmsViewModel::class.java)
-    filmsViewModel.init(FilmsRepository(FilmsFirebaseSource()))
+    filmsViewModel.init(FilmsRepository(FilmsFirebaseSource(), (application as StarArchWarsApplication).roomDb.filmDao()))
     filmsViewModel.getFilms().observeNonNull(this) {
       filmsAdapter.addItems(it)
       hideLoading()

@@ -16,11 +16,11 @@ class FilmsRepository(private val filmsFirebaseSource: FilmsFirebaseSource,
   private val result = MediatorLiveData<Films>()
 
   fun getFilms(): LiveData<Films> {
-    val dbSource = loadFromLocal()
-    result.addSource(dbSource, { data ->
-      result.removeSource(dbSource)
+    val localSource = loadFromLocal()
+    result.addSource(localSource, { data ->
+      result.removeSource(localSource)
       if (shouldFetch(data)) {
-        loadFromRemote(dbSource)
+        loadFromRemote(localSource)
       } else {
         result.value = data
       }
@@ -36,16 +36,19 @@ class FilmsRepository(private val filmsFirebaseSource: FilmsFirebaseSource,
     return data == null || data.count == 0
   }
 
-  private fun loadFromRemote(dbSource: LiveData<Films>) {
-    filmsFirebaseSource.getFilms().map {
-      result.removeSource(dbSource)
-      saveFilmsFromRemote(it)
-      result.addSource(loadFromLocal(), { result.value = it })
-    }
+  private fun loadFromRemote(localSource: LiveData<Films>) {
+    val remoteSource = filmsFirebaseSource.getFilms()
+    result.addSource(remoteSource, { data ->
+      result.removeSource(remoteSource)
+      saveFilmsFromRemote(data)
+      result.addSource(localSource, { result.value = it })
+    })
   }
 
-  private fun saveFilmsFromRemote(data: DataSnapshot) {
-    data.getFilms().map { it.getFilmEntity() }.apply { filmDao.saveAll(this) }
+  private fun saveFilmsFromRemote(data: DataSnapshot?) {
+    Thread(Runnable {
+      data?.getFilms()?.map { it.getFilmEntity() }?.apply { filmDao.saveAll(this) }
+    }).start()
   }
 
   private fun List<FilmEntity>.getFilms(): List<Film> {
@@ -60,8 +63,6 @@ class FilmsRepository(private val filmsFirebaseSource: FilmsFirebaseSource,
           }
     }
   }
-
-  private fun DataSnapshot.getCount() = this.child("count").getValue(Int::class.java) ?: 0
 
   private fun DataSnapshot.getFilms(): List<Film> {
     return arrayListOf<Film>().apply {

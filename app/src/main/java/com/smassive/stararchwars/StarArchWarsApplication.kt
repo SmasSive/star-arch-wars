@@ -1,9 +1,13 @@
 package com.smassive.stararchwars
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.os.StrictMode
+import com.smassive.stararchwars.data.films.datasource.local.FilmsRoomSource
 
 class StarArchWarsApplication : Application() {
+
+  lateinit var roomDb: FilmsRoomSource
 
   override fun onCreate() {
     super.onCreate()
@@ -22,5 +26,7 @@ class StarArchWarsApplication : Application() {
           .penaltyDeath()
           .build())
     }
+
+    roomDb = Room.databaseBuilder(this, FilmsRoomSource::class.java, FilmsRoomSource.DB_NAME).build()
   }
 }
