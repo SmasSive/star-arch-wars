@@ -2,6 +2,7 @@ package com.smassive.stararchwars
 
 import android.app.Application
 import android.arch.persistence.room.Room
+import android.content.Context
 import android.os.StrictMode
 import com.smassive.stararchwars.data.films.datasource.local.FilmsRoomSource
 
@@ -27,6 +28,12 @@ class StarArchWarsApplication : Application() {
           .build())
     }
 
+    initDb()
+  }
+
+  private fun initDb() {
     roomDb = Room.databaseBuilder(this, FilmsRoomSource::class.java, FilmsRoomSource.DB_NAME).build()
   }
 }
+
+fun Context.asApp() = this.applicationContext as StarArchWarsApplication
