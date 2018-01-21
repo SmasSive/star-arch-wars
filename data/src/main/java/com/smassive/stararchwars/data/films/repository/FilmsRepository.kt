@@ -1,9 +1,9 @@
 package com.smassive.stararchwars.data.films.repository
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
 import com.google.firebase.database.DataSnapshot
 import com.smassive.stararchwars.data.base.extensions.map
+import com.smassive.stararchwars.data.base.datasource.DataSourceGovernor
 import com.smassive.stararchwars.data.films.datasource.local.FilmDao
 import com.smassive.stararchwars.data.films.datasource.local.model.FilmEntity
 import com.smassive.stararchwars.data.films.datasource.remote.FilmsFirebaseSource
@@ -13,42 +13,20 @@ import com.smassive.stararchwars.data.films.model.Films
 class FilmsRepository(private val filmsFirebaseSource: FilmsFirebaseSource,
                       private val filmDao: FilmDao) {
 
-  private val result = MediatorLiveData<Films>()
-
   fun getFilms(): LiveData<Films> {
-    val localSource = loadFromLocal()
-    result.addSource(localSource, { data ->
-      result.removeSource(localSource)
-      if (shouldFetch(data)) {
-        loadFromRemote(localSource)
-      } else {
-        result.value = data
+    return object : DataSourceGovernor<Films, DataSnapshot>() {
+      override fun loadFromLocal(): LiveData<Films> = filmDao.loadAll().map { Films(it.size, it.getFilms()) }
+
+      override fun shouldFetch(data: Films?): Boolean {
+        return data?.count == 0
       }
-    })
-    return result
-  }
 
-  private fun loadFromLocal(): LiveData<Films> {
-    return filmDao.loadAll().map { Films(it.size, it.getFilms()) }
-  }
+      override fun createRemoteCall(): LiveData<DataSnapshot> = filmsFirebaseSource.getFilms()
 
-  private fun shouldFetch(data: Films?): Boolean {
-    return data == null || data.count == 0
-  }
-
-  private fun loadFromRemote(localSource: LiveData<Films>) {
-    val remoteSource = filmsFirebaseSource.getFilms()
-    result.addSource(remoteSource, { data ->
-      result.removeSource(remoteSource)
-      saveFilmsFromRemote(data)
-      result.addSource(localSource, { result.value = it })
-    })
-  }
-
-  private fun saveFilmsFromRemote(data: DataSnapshot?) {
-    Thread(Runnable {
-      data?.getFilms()?.map { it.getFilmEntity() }?.apply { filmDao.saveAll(this) }
-    }).start()
+      override fun saveResponseFromRemote(data: DataSnapshot?) {
+        data?.getFilms()?.map { it.getFilmEntity() }?.apply { filmDao.saveAll(this) }
+      }
+    }.getAsLiveData()
   }
 
   private fun List<FilmEntity>.getFilms(): List<Film> {
