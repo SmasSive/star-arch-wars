@@ -9,6 +9,7 @@ import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
+import com.github.salomonbrys.kodein.with
 import com.smassive.stararchwars.R
 import com.smassive.stararchwars.base.extensions.enterListAnimation
 import com.smassive.stararchwars.data.base.extensions.observeNonNull
@@ -23,9 +24,9 @@ class FilmsActivity : AppCompatActivity(), LazyKodeinAware {
   override val kodein = LazyKodein(appKodein)
 
   val filmsRepository: FilmsRepository by instance()
+  val filmsAdapter: FilmsAdapter by with(this as AppCompatActivity).instance()
 
   private lateinit var filmsViewModel: FilmsViewModel
-  private val filmsAdapter = FilmsAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
