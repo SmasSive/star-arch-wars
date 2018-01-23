@@ -45,6 +45,8 @@ class StarArchWarsApplication : Application(), KodeinAware {
     }
   }
 
+  lateinit var roomDb: FilmsRoomSource
+
   override fun onCreate() {
     super.onCreate()
 
@@ -62,6 +64,12 @@ class StarArchWarsApplication : Application(), KodeinAware {
           .penaltyDeath()
           .build())
     }
+
+    initDb()
+  }
+
+  private fun initDb() {
+    roomDb = Room.databaseBuilder(this, FilmsRoomSource::class.java, FilmsRoomSource.DB_NAME).build()
   }
 }
 
