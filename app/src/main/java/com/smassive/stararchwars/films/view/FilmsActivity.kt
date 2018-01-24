@@ -27,12 +27,15 @@ class FilmsActivity : BaseActivity() {
     bind<FilmsAdapter>() with scopedSingleton(androidActivityScope) {
       FilmsAdapter()
     }
+
+    bind<FilmsViewModel>() with scopedSingleton(androidActivityScope) {
+      ViewModelProviders.of(this@FilmsActivity).get(FilmsViewModel::class.java)
+    }
   }
 
   val filmsRepository: FilmsRepository by instance()
   val filmsAdapter: FilmsAdapter by with(this as AppCompatActivity).instance()
-
-  private lateinit var filmsViewModel: FilmsViewModel
+  val filmsViewModel: FilmsViewModel by with(this as AppCompatActivity).instance()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -63,7 +66,6 @@ class FilmsActivity : BaseActivity() {
   }
 
   private fun configViewModel() {
-    filmsViewModel = ViewModelProviders.of(this).get(FilmsViewModel::class.java)
     filmsViewModel.init(filmsRepository)
     filmsViewModel.getFilms().observeNonNull(this) {
       filmsAdapter.addItems(it)
