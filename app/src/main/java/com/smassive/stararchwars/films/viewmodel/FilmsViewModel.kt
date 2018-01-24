@@ -9,13 +9,8 @@ import com.smassive.stararchwars.data.films.model.Films
 import com.smassive.stararchwars.data.films.repository.FilmsRepository
 import com.smassive.stararchwars.films.model.FilmItem
 
-class FilmsViewModel(application: Application) : AndroidViewModel(application) {
-
-  private lateinit var filmsRepository: FilmsRepository
-
-  fun init(filmsRepository: FilmsRepository) {
-    this.filmsRepository = filmsRepository
-  }
+class FilmsViewModel(application: Application,
+                     private val filmsRepository: FilmsRepository) : AndroidViewModel(application) {
 
   fun getFilms(): LiveData<List<FilmItem>> = filmsRepository.getFilms().map { it.getFilmItems() }
 
