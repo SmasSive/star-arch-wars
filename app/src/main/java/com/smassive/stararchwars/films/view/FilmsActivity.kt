@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.github.salomonbrys.kodein.LazyKodein
-import com.github.salomonbrys.kodein.LazyKodeinAware
-import com.github.salomonbrys.kodein.android.appKodein
+import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.android.androidActivityScope
+import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
+import com.github.salomonbrys.kodein.scopedSingleton
 import com.github.salomonbrys.kodein.with
 import com.smassive.stararchwars.R
 import com.smassive.stararchwars.base.extensions.enterListAnimation
+import com.smassive.stararchwars.base.view.BaseActivity
 import com.smassive.stararchwars.data.base.extensions.observeNonNull
 import com.smassive.stararchwars.data.films.repository.FilmsRepository
 import com.smassive.stararchwars.films.viewmodel.FilmsViewModel
@@ -19,9 +21,13 @@ import kotlinx.android.synthetic.main.activity_films.toolbar
 import kotlinx.android.synthetic.main.content_films.filmsList
 import kotlinx.android.synthetic.main.content_films.filmsLoading
 
-class FilmsActivity : AppCompatActivity(), LazyKodeinAware {
+class FilmsActivity : BaseActivity() {
 
-  override val kodein = LazyKodein(appKodein)
+  override val activityModule = Kodein.Module {
+    bind<FilmsAdapter>() with scopedSingleton(androidActivityScope) {
+      FilmsAdapter()
+    }
+  }
 
   val filmsRepository: FilmsRepository by instance()
   val filmsAdapter: FilmsAdapter by with(this as AppCompatActivity).instance()
