@@ -21,7 +21,7 @@
          parent="ThemeOverlay.AppCompat.Light"/>
 
   <style name="FilmList">
-    <item name="android:textColor">@color/star_wars_yellow</item>
+    <item name="android:textColor">@color/colorPrimary</item>
   </style>
 
   <style name="FilmList.Title">

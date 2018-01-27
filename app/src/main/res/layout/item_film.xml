@@ -4,6 +4,7 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:layout_width="match_parent"
                                              android:layout_height="@dimen/card_height"
+                                             android:background="@android:color/black"
     >
 
   <ImageView
@@ -11,6 +12,13 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       tools:src="@drawable/ic_rebel_alliance_logo"
+      />
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/card_shadow_height"
+      android:background="@drawable/item_film_gradient_background"
+      app:layout_constraintBottom_toBottomOf="parent"
       />
 
   <TextView

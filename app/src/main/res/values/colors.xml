@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorPrimary">#ffd700</color>
+  <color name="colorPrimaryDark">#d9b100</color>
   <color name="colorAccent">#FF4081</color>
 
-  <color name="star_wars_yellow">#ffd700</color>
+  <color name="black_50">#80000000</color>
+  <color name="grey_dark">#333333</color>
+  <color name="colorPrimary_50">#80ffd700</color>
 </resources>
