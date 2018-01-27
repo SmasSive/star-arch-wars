@@ -11,6 +11,7 @@ This project is just to learn how to use the Android Architecture Components wit
 - ViewModel
 - Firebase
 - Kodein
+- Kotlin coroutines
 
 ## References
 - Firebase blog ([1](https://firebase.googleblog.com/2017/12/using-android-architecture-components.html), [2](https://firebase.googleblog.com/2017/12/using-android-architecture-components_20.html), [3](https://firebase.googleblog.com/2017/12/using-android-architecture-components_22.html))
@@ -18,6 +19,7 @@ This project is just to learn how to use the Android Architecture Components wit
 - [Kodein](https://github.com/SalomonBrys/Kodein)
 - Google's [Android Architecture Components](https://github.com/googlesamples/android-architecture-components) samples
 - Karumi's [KataScreenshotKotlin](https://github.com/Karumi/KataScreenshotKotlin)
+- Kotlin [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md)
 
 ## Kudos :heart:
 - [@Sloy](https://github.com/Sloy)

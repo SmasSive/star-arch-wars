@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
 import com.smassive.stararchwars.data.base.extensions.logd
+import kotlinx.coroutines.experimental.launch
 
 abstract class DataSourceGovernor<ResultType, RequestType> {
 
@@ -39,9 +40,9 @@ abstract class DataSourceGovernor<ResultType, RequestType> {
     createRemoteCall().run {
       result.addSource(this, {
         result.removeSource(this)
-        Thread(Runnable {
+        launch {
           saveResponseFromRemote(it)
-        }).start()
+        }
         result.addSource(localSource, { result.value = it })
       })
     }
