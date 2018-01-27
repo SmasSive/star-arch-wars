@@ -12,7 +12,7 @@ import com.smassive.stararchwars.films.view.FilmsAdapter
 import com.smassive.stararchwars.films.viewmodel.FilmsViewModel
 import com.smassive.stararchwars.films.viewmodel.FilmsViewModelFactory
 
-fun filmsActivityModule(filmsActivity: FilmsActivity) = Kodein.Module {
+fun filmsActivityModule(filmsActivity: FilmsActivity) = Kodein.Module(allowSilentOverride = true) {
   bind<FilmsAdapter>() with scopedSingleton(androidActivityScope) {
     FilmsAdapter()
   }

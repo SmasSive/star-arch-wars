@@ -42,7 +42,7 @@ class StarArchWarsApplication : Application(), KodeinAware {
   }
 
   fun addModule(activityModule: Kodein.Module) {
-    kodein.addImport(activityModule)
+    kodein.addImport(activityModule, allowOverride = true)
   }
 }
 
