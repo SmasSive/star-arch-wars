@@ -3,7 +3,7 @@ package com.smassive.stararchwars.base.view
 import android.os.Bundle
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.android.KodeinAppCompatActivity
-import com.smassive.stararchwars.asApp
+import com.smassive.stararchwars.infrastructure.asApp
 
 abstract class BaseActivity : KodeinAppCompatActivity() {
 
